@@ -18,7 +18,7 @@ Code is no longer written by hand. This repository provides:
 4.  **Answer the Interview:** The Agent will ask you about the destination, vibe, and duration.
 5.  **Watch it Build:** The Agent will generate the `itineraryData.js`, fetch assets, and build the site.
 
-## How to Use (For Agents)
+## How to Use (For AI Agents)
 **READ `MASTER_WORKFLOW_PROMPT.md` FIRST.**
 This file contains your Standard Operating Procedure (SOP). Do not deviate.
 
