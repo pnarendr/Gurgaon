@@ -53,6 +53,16 @@ For each intent card, run 3–6 targeted searches:
 -   **Proximate fallback:** Expand geography (nearby district) or subject (same concept in same region).
 -   **Vibe:** Add keywords like “dusk”, “twilight”, “lantern”, “interior”, “mist”.
 
+### Step 2a: Handling Missing Specifics (Strict Truth)
+**NEVER substitute a specific property with a competitor.**
+*   *Bad:* Using "Shangri-La Lobby" for "Athenee Hotel". (Deceptive).
+*   *Good:* Using "Bangkok Skyline at Sunset" (Atmospheric/Neutral) OR **Stopping to ask the User**.
+
+**Action:** If a specific key asset (Hotel, Specific Restaurant) is not found in Tier A/B:
+1.  **Stop.** Do not hallucinate or substitute.
+2.  Report it as `MISSING` in the Phase 4 user prompt.
+
+
 ### Step 3: Candidate Screening Checklist (Fast Reject)
 Reject if:
 -   File can’t be downloaded (403/404, blocked hotlinking).
@@ -86,7 +96,7 @@ Return a manifest keyed by placeholder path:
   "/images/day3_golden_triangle_longtail_boat.png": [
     {
       "rank": 1,
-      "direct_url": "https://upload.wikimedia.org/...",
+      "direct_url": "https://commons.wikimedia.org/wiki/Special:FilePath/File_Name.jpg",
       "source_page": "https://commons.wikimedia.org/wiki/File:...",
       "license": "CC BY-SA 4.0",
       "author": "Photographer Name",
@@ -107,9 +117,22 @@ Return a manifest keyed by placeholder path:
 }
 ```
 
+### Step 7: Fallback & Recovery Protocol (Interactive)
+**If NO valid verified asset, TIER A, or TIER B candidate is found:**
+
+Do NOT silently fail or hallucinate. Instead, **engage the user** with the following options:
+
+1.  **Option A: Synthetic Generation (AI)**
+    -   Propose a specific, high-fidelity prompt for the `generate_image` tool.
+    -   *Example:* "I cannot find a verified license-free image for `Golden Triangle Boat`. Shall I generate one with this prompt: *'Cinematic wide shot, long-tail boat on Mekong River at golden hour, misty mountains in background, hyper-realistic, 8k'*?"
+
+2.  **Option B: User Provision (Paste)**
+    -   Invite the user to paste an image directly into the chat/filesystem.
+    -   *Example:* "Or, if you have a specific image, please paste it here or place it in `public/images/` and tell me the filename."
+
+**Action:** Wait for user decision before proceeding with a placeholder.
+
 ## Anti-Hallucination Stop Conditions
-Stop and explicitly say “not found” if:
--   No downloadable file exists at a stable URL.
--   License cannot be established.
--   Only tiny thumbnails exist.
-👉 **Then provide:** what you tried, what failed, and the nearest safe substitutes.
+-   **Never** use a URL you haven't verified with a HEAD/GET request.
+-   **Never** use a "preview" URL (e.g., Google Images thumb) as a final asset.
+-   **Always** fallback to the dialogue above rather than guessing.
