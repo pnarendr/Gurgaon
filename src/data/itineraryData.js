@@ -1,8 +1,14 @@
+// TEMPLATE DATA: This file is meant to be overwritten by the Agent.
 export const itineraryData = {
     tripDetails: {
         title: "Costa Rica: The Emerald Sanctuary",
         subtitle: "Mist, Fire, and the Golden Pacific",
         heroImage: "/images/hero.png" // Added for template structure
+    },
+    seoMetadata: {
+        title: "Day Trips from Gurgaon: A Curated Guide",
+        description: "Explore the best day trips from Gurgaon. From heritage sites to nature escapes, discover curated journeys just a short drive away.",
+        ogImage: "/images/hero.png"
     },
     introContent: {
         headline: "Pura Vida, Elevated",
