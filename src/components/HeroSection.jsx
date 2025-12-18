@@ -61,12 +61,7 @@ export default function HeroSection({ title, subtitle, heroImage }) {
                 </h1>
                 <p className="font-sans text-lg md:text-xl font-light tracking-wide text-white/90 animate-fade-in-up animation-delay-400">
                     {subtitle}
-                </p>
-
-                <div className="mt-12 animate-fade-in-up animation-delay-600">
-                    <div className="h-16 w-[1px] bg-white/30 mx-auto" />
-                </div>
-            </div>
+                </p>            </div>
         </section>
     );
 }
